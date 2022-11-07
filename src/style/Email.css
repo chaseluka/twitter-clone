@@ -1,0 +1,43 @@
+#email-su {
+  display: flex;
+  flex-direction: column;
+  gap: 4vh;
+  margin-top: 3vh;
+}
+
+#email-su input {
+  max-width: 400px;
+  min-width: 200px;
+  width: 300px;
+  background-color: #000;
+  color: #fff;
+  height: 50px;
+  border: 1px solid rgb(51, 54, 57);
+  border-radius: 4px;
+  font-size: 20px;
+  padding: 0px 10px;
+}
+
+#email-su input:-webkit-autofill,
+#email-su input:-webkit-autofill:hover,
+#email-su input:-webkit-autofill:focus,
+#email-su input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #000 inset !important;
+  box-shadow: 0 0 0 30px #000 inset !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+#email-su input:focus {
+  outline: none;
+  border: 2px solid rgb(29, 155, 240);
+}
+
+#email-su input::placeholder {
+  color: #ddd;
+}
+
+.email .sign-up-option-container {
+  background-color: rgb(29, 155, 240);
+  color: #fff;
+  margin-top: 3vh;
+}

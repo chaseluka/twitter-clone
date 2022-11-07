@@ -1,0 +1,99 @@
+#popup {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(91, 112, 131, 0.4);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+}
+
+#popup,
+.auth-container,
+.sign-up-text-container,
+.sign-up-option-container,
+.sign-in-options,
+.have-account-container {
+  display: flex;
+}
+
+#popup,
+.sign-up-text-container,
+.sign-up-option-container,
+.sign-in-options,
+.have-account-container {
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-container {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.auth-container {
+  min-height: 300px;
+  max-height: 90vh;
+  height: 650px;
+  min-width: 530px;
+  max-width: 80vw;
+  background-color: #000;
+  z-index: 10;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 1;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.auth-container .sign-up-title {
+  font-size: 31px;
+  font-weight: 700;
+  margin-top: 10vh;
+}
+
+.sign-in-options {
+  flex-direction: column;
+  gap: 3.5vh;
+  margin-top: 8vh;
+}
+
+.sign-up-option-container {
+  gap: 5px;
+  font-weight: 700;
+  max-width: 400px;
+  min-width: 200px;
+  width: 300px;
+  background-color: #fff;
+  color: #000;
+  border-radius: 30px;
+  padding: 3% 1.5%;
+}
+
+.sign-up-option-container svg {
+  filter: invert(0%) sepia(1%) saturate(7453%) hue-rotate(16deg)
+    brightness(104%) contrast(100%);
+}
+
+.sign-up-option-container:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+.sign-up-title:first-child {
+  margin-top: 10vh;
+}
+
+.have-account-container {
+  gap: 7px;
+  margin-top: 5vh;
+}
+
+.cancel-popup {
+  position: absolute;
+  top: 2%;
+  left: 5%;
+  font-size: 30px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}

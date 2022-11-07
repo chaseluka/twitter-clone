@@ -1,0 +1,40 @@
+svg {
+  filter: invert(100%) sepia(25%) saturate(0%) hue-rotate(33deg)
+    brightness(113%) contrast(100%);
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+#banner {
+  width: 400px;
+  border-right: 1px solid gray;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.tab,
+.banner-container {
+  display: flex;
+}
+
+.tab {
+  align-items: center;
+}
+
+.banner-container {
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.banner-element {
+  width: 50%;
+}
+
+.banner-container {
+  margin: 2vh 4vw;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
