@@ -97,3 +97,9 @@
   font-size: 30px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
+
+.error {
+  color: red;
+  margin-left: 10px;
+  font-size: 15px;
+}
