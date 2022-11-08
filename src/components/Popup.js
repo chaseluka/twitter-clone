@@ -1,25 +1,59 @@
 import React, { useState } from "react";
 import "../style/Popup.css";
-import { ReactComponent as GoogleLogo } from "../style/images/google.svg";
-import { app } from "../firebase/firebase.config";
 import SignUp from "./SignUp";
 import Email from "./Email";
+import Google from "./Google";
 
 const Popup = (props) => {
-  const google = props.google;
+  const googleSignIn = props.google;
+  const createViaEmail = props.createViaEmail;
+  const saveUserToDatabase = props.saveUserToDatabase;
 
-  const [email, setEmail] = useState(false);
+  const [emailSelected, setEmailSelected] = useState(false);
+  const [google, setGoogle] = useState(false);
 
-  const emailSignUp = () => setEmail(true);
-  //if email is true, then do the sign up thing
+  const emailSignUp = () => setEmailSelected(true);
+  const googleSignUp = () => setGoogle(true);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  const [displayName, setDisplayName] = useState("");
+
+  const onSubmitUser = (e) => {
+    e.preventDefault();
+    if (emailSelected) createViaEmail(email, password, username, displayName);
+    if (google) saveUserToDatabase(username, displayName);
+  };
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    if (e.target.id === "email") setEmail(e.target.value);
+    if (e.target.id === "password") setPassword(e.target.value);
+    if (e.target.id === "username") setUsername(e.target.value);
+    if (e.target.id === "display-name") setDisplayName(e.target.value);
+  };
 
   return (
     <div id="popup">
       {(() => {
-        console.log(email);
-        if (email) {
-          return <Email />;
-        } else return <SignUp google={google} email={emailSignUp} />;
+        console.log(google);
+        if (emailSelected) {
+          return (
+            <Email onSubmitUser={onSubmitUser} handleChange={handleChange} />
+          );
+        } else if (google) {
+          return (
+            <Google onSubmitUser={onSubmitUser} handleChange={handleChange} />
+          );
+        } else
+          return (
+            <SignUp
+              googleSignIn={googleSignIn}
+              google={googleSignUp}
+              email={emailSignUp}
+            />
+          );
       })()}
     </div>
   );

@@ -1,11 +1,12 @@
-#email-su {
+#email-su,
+#google-su {
   display: flex;
   flex-direction: column;
-  gap: 4vh;
+  gap: 2vh;
   margin-top: 3vh;
 }
 
-#email-su input {
+#popup input {
   max-width: 400px;
   min-width: 200px;
   width: 300px;
@@ -18,21 +19,21 @@
   padding: 0px 10px;
 }
 
-#email-su input:-webkit-autofill,
-#email-su input:-webkit-autofill:hover,
-#email-su input:-webkit-autofill:focus,
-#email-su input:-webkit-autofill:active {
+#popup input:-webkit-autofill,
+#popup input:-webkit-autofill:hover,
+#popup input:-webkit-autofill:focus,
+#popup input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px #000 inset !important;
   box-shadow: 0 0 0 30px #000 inset !important;
   -webkit-text-fill-color: #fff !important;
 }
 
-#email-su input:focus {
+#popup input:focus {
   outline: none;
   border: 2px solid rgb(29, 155, 240);
 }
 
-#email-su input::placeholder {
+#popup input::placeholder {
   color: #ddd;
 }
 
@@ -40,4 +41,5 @@
   background-color: rgb(29, 155, 240);
   color: #fff;
   margin-top: 3vh;
+  border: none;
 }
