@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../style/Popup.css";
 import SignUp from "./SignUp";
+import Login from "./Login";
 
 const Popup = ({
   googleSignIn,
@@ -8,8 +9,13 @@ const Popup = ({
   saveUserToDatabase,
   usernameIsAvailable,
   emailIsAvailable,
+  signUserIn,
+  emailIsValid,
+  passwordIsCorrect,
+  noOtherErrors,
+  togglePopup,
 }) => {
-  const [signUpSelected, setSignUpSelected] = useState(true);
+  const [signUpSelected, setSignUpSelected] = useState(false);
 
   return (
     <div id="popup">
@@ -22,9 +28,20 @@ const Popup = ({
               saveUserToDatabase={saveUserToDatabase}
               usernameIsAvailable={usernameIsAvailable}
               emailIsAvailable={emailIsAvailable}
+              togglePopup={togglePopup}
             />
           );
-        }
+        } else
+          return (
+            <Login
+              googleSignIn={googleSignIn}
+              signUserIn={signUserIn}
+              emailIsValid={emailIsValid}
+              passwordIsCorrect={passwordIsCorrect}
+              noOtherErrors={noOtherErrors}
+              togglePopup={togglePopup}
+            />
+          );
       })()}
     </div>
   );

@@ -1,10 +1,20 @@
 import React from "react";
 import "../style/Email.css";
 
-const Email = ({ onSubmitUser, handleChange, emailIsTaken }) => {
+const Email = ({
+  onSubmitUser,
+  handleChange,
+  emailIsTaken,
+  incorrectEmail,
+  incorrectPassword,
+  otherError,
+  togglePopup,
+}) => {
   return (
     <div className="auth-container email">
-      <div className="cancel-popup">x</div>
+      <div className="cancel-popup" onClick={() => togglePopup()}>
+        x
+      </div>
       <div className="sign-up-title">Create your account</div>
       <form id="email-su" onSubmit={onSubmitUser}>
         <div className="input-contianer">
@@ -23,16 +33,38 @@ const Email = ({ onSubmitUser, handleChange, emailIsTaken }) => {
                   This email is in use. Please use another.
                 </div>
               );
+            if (incorrectEmail)
+              return (
+                <div className="error">
+                  This email is not associated with an account.
+                </div>
+              );
+            if (otherError)
+              return (
+                <div className="error">
+                  Something went wrong please try again.
+                </div>
+              );
+          })()}
+        </div>
+        <div className="input-contianer">
+          <input
+            onChange={handleChange}
+            type="password"
+            id="password"
+            placeholder="Password"
+            required
+          />
+          {(() => {
+            if (incorrectPassword)
+              return (
+                <div className="error">
+                  Incorrect password. Please try again.
+                </div>
+              );
           })()}
         </div>
 
-        <input
-          onChange={handleChange}
-          type="password"
-          id="password"
-          placeholder="Password"
-          required
-        />
         <button className="sign-up-option-container" type="submit">
           <div className="sign-up-text-container">
             <div className="sign-up-text">Continue</div>
