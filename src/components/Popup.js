@@ -7,6 +7,7 @@ const Popup = ({
   createViaEmail,
   saveUserToDatabase,
   usernameIsAvailable,
+  emailIsAvailable,
 }) => {
   const [signUpSelected, setSignUpSelected] = useState(true);
 
@@ -20,6 +21,7 @@ const Popup = ({
               createViaEmail={createViaEmail}
               saveUserToDatabase={saveUserToDatabase}
               usernameIsAvailable={usernameIsAvailable}
+              emailIsAvailable={emailIsAvailable}
             />
           );
         }

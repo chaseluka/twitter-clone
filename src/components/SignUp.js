@@ -9,6 +9,7 @@ const SignUp = ({
   createViaEmail,
   saveUserToDatabase,
   usernameIsAvailable,
+  emailIsAvailable,
 }) => {
   const [emailSelected, setEmailSelected] = useState(false);
   const [finish, setFinish] = useState(false);
@@ -18,8 +19,9 @@ const SignUp = ({
   const [username, setUsername] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [usernameIsTaken, setUsernameIsTaken] = useState(false);
+  const [emailIsTaken, setEmailIsTaken] = useState(false);
 
-  const onSubmitUser = (e) => {
+  const onSubmitUser = async (e) => {
     e.preventDefault();
     if (finish) {
       if (usernameIsAvailable(username)) {
@@ -27,8 +29,9 @@ const SignUp = ({
       } else setUsernameIsTaken(true);
     }
     if (emailSelected && !finish) {
-      createViaEmail(email, password);
-      setFinish(true);
+      await createViaEmail(email, password);
+      if (emailIsAvailable()) setFinish(true);
+      else setEmailIsTaken(true);
     }
   };
 
@@ -80,7 +83,11 @@ const SignUp = ({
       {(() => {
         if (emailSelected && !finish)
           return (
-            <Email onSubmitUser={onSubmitUser} handleChange={handleChange} />
+            <Email
+              onSubmitUser={onSubmitUser}
+              handleChange={handleChange}
+              emailIsTaken={emailIsTaken}
+            />
           );
         if (finish)
           return (

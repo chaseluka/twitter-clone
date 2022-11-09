@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -13,18 +13,19 @@ import { store } from "../firebase/firebase.config";
 
 const Auth = () => {
   const [users, setUsers] = useState([]);
+  const emailInUse = useRef(true);
 
   useEffect(() => {
     const retrieveCharacters = async () => {
       try {
         const usersQuery = query(collection(store, "users"));
         const querySnapshot = await getDocs(usersQuery);
-        const usersFromData = [];
+        const usersFromDB = [];
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          usersFromData.push(data);
+          usersFromDB.push(data);
         });
-        setUsers(usersFromData);
+        setUsers(usersFromDB);
       } catch (err) {
         console.log(err);
       }
@@ -38,14 +39,18 @@ const Auth = () => {
     var provider = new GoogleAuthProvider();
     await signInWithPopup(auth, provider);
   }
-
+  //pick up below this tomorrow
   const createUser = async (email, password) => {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
+      emailInUse.current = false;
     } catch (error) {
-      console.log(error);
+      if (error.message === "Firebase: Error (auth/email-already-in-use).")
+        emailInUse.current = true;
     }
   };
+
+  const emailIsAvailable = () => (emailInUse.current ? false : true);
 
   const getUserUid = () => getAuth().currentUser.uid;
 
@@ -71,6 +76,7 @@ const Auth = () => {
         createViaEmail={createUser}
         saveUserToDatabase={saveUserToDatabase}
         usernameIsAvailable={usernameIsAvailable}
+        emailIsAvailable={emailIsAvailable}
       />
     </div>
   );
