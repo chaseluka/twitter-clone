@@ -9,13 +9,18 @@ const Email = ({
   incorrectPassword,
   otherError,
   togglePopup,
+  login,
 }) => {
   return (
     <div className="auth-container email">
       <div className="cancel-popup" onClick={() => togglePopup()}>
         x
       </div>
-      <div className="sign-up-title">Create your account</div>
+      {(() => {
+        if (login)
+          return <div className="sign-up-title">Sign into your account</div>;
+        else return <div className="sign-up-title">Create your account</div>;
+      })()}
       <form id="email-su" onSubmit={onSubmitUser}>
         <div className="input-contianer">
           <input

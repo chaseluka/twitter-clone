@@ -1,30 +1,25 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 import React, { useState } from "react";
 import "../style/App.css";
 import Home from "./Home";
-//import Profile from "./Profile";
 import Auth from "./Auth";
-import Banner from "./Banner";
 
 function App() {
-  const [displayPopup, setDisplayPopup] = useState(true);
+  const [displayPopup, setDisplayPopup] = useState(false);
+  const [login, setLogin] = useState(true);
 
   const togglePopup = () => setDisplayPopup((displayPopup) => !displayPopup);
+  //allow click on login or sign up to show the authentication view.
 
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL + "/"}>
-      <Banner />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        {/*<Route path="/profile" element={<Profile />} />*/}
-        <Route
-          path="/signin"
-          element={
-            <Auth displayPopup={displayPopup} togglePopup={togglePopup} />
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <Home setLogin={setLogin} setDisplayPopup={setDisplayPopup} />
+      <Auth
+        displayPopup={displayPopup}
+        togglePopup={togglePopup}
+        login={login}
+      />
+      ;
+    </div>
   );
 }
 

@@ -10,6 +10,7 @@ const Login = ({
   passwordIsCorrect,
   noOtherErrors,
   togglePopup,
+  setLoginSelected,
 }) => {
   const [emailSelected, setEmailSelected] = useState(false);
 
@@ -69,7 +70,12 @@ const Login = ({
               </div>
               <div className="have-account-container">
                 <div className="have-account">Don't have an account?</div>
-                <div className="login-link">Sign up</div>
+                <div
+                  className="login-link"
+                  onClick={() => setLoginSelected(false)}
+                >
+                  Sign up
+                </div>
               </div>
             </div>
           );
@@ -85,6 +91,7 @@ const Login = ({
               incorrectPassword={incorrectPassword}
               otherError={otherError}
               togglePopup={togglePopup}
+              login={true}
             />
           );
       })()}

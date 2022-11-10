@@ -12,7 +12,7 @@ import { collection, addDoc, query, getDocs } from "firebase/firestore";
 import Popup from "./Popup";
 import { store } from "../firebase/firebase.config";
 
-const Auth = ({ displayPopup, togglePopup }) => {
+const Auth = ({ displayPopup, togglePopup, login }) => {
   const [users, setUsers] = useState([]);
   const emailInUse = useRef(true);
   const invalidEmail = useRef(false);
@@ -110,6 +110,7 @@ const Auth = ({ displayPopup, togglePopup }) => {
               passwordIsCorrect={passwordIsCorrect}
               noOtherErrors={noOtherErrors}
               togglePopup={togglePopup}
+              login={login}
             />
           );
       })()}

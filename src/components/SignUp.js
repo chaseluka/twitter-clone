@@ -11,6 +11,7 @@ const SignUp = ({
   usernameIsAvailable,
   emailIsAvailable,
   togglePopup,
+  setLoginSelected,
 }) => {
   const [emailSelected, setEmailSelected] = useState(false);
   const [finish, setFinish] = useState(false);
@@ -79,7 +80,12 @@ const SignUp = ({
               </div>
               <div className="have-account-container">
                 <div className="have-account">Already have an account?</div>
-                <div className="login-link">Log in</div>
+                <div
+                  className="login-link"
+                  onClick={() => setLoginSelected(true)}
+                >
+                  Log in
+                </div>
               </div>
             </div>
           );

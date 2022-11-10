@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../style/Popup.css";
 import SignUp from "./SignUp";
 import Login from "./Login";
@@ -14,24 +14,19 @@ const Popup = ({
   passwordIsCorrect,
   noOtherErrors,
   togglePopup,
+  login,
 }) => {
-  const [signUpSelected, setSignUpSelected] = useState(false);
+  const [loginSelected, setLoginSelected] = useState(false);
+
+  useEffect(() => {
+    if (login) setLoginSelected(true);
+    else setLoginSelected(false);
+  }, [login]);
 
   return (
     <div id="popup">
       {(() => {
-        if (signUpSelected) {
-          return (
-            <SignUp
-              googleSignIn={googleSignIn}
-              createViaEmail={createViaEmail}
-              saveUserToDatabase={saveUserToDatabase}
-              usernameIsAvailable={usernameIsAvailable}
-              emailIsAvailable={emailIsAvailable}
-              togglePopup={togglePopup}
-            />
-          );
-        } else
+        if (loginSelected) {
           return (
             <Login
               googleSignIn={googleSignIn}
@@ -40,6 +35,19 @@ const Popup = ({
               passwordIsCorrect={passwordIsCorrect}
               noOtherErrors={noOtherErrors}
               togglePopup={togglePopup}
+              setLoginSelected={setLoginSelected}
+            />
+          );
+        } else
+          return (
+            <SignUp
+              googleSignIn={googleSignIn}
+              createViaEmail={createViaEmail}
+              saveUserToDatabase={saveUserToDatabase}
+              usernameIsAvailable={usernameIsAvailable}
+              emailIsAvailable={emailIsAvailable}
+              togglePopup={togglePopup}
+              setLoginSelected={setLoginSelected}
             />
           );
       })()}
