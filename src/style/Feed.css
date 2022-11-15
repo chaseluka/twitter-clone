@@ -1,0 +1,29 @@
+#feed {
+  max-width: 600px;
+  width: 100%;
+  flex-shrink: 0;
+  border-right: 1px solid rgb(47, 51, 54);
+  border-left: 1px solid rgb(47, 51, 54);
+  z-index: 1;
+}
+
+.feed-title-container {
+  display: flex;
+}
+
+.feed-title-container {
+  justify-content: flex-start;
+  align-items: center;
+  height: 53px;
+  z-index: 3;
+  position: sticky;
+  top: -0.5;
+  background-color: rgba(0, 0, 0, 0.65);
+  width: 100%;
+}
+
+.feed-title {
+  font-size: 1.3rem;
+  margin-left: 1vw;
+  font-weight: bolder;
+}

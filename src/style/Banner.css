@@ -6,37 +6,55 @@ svg {
 }
 
 #banner {
-  min-width: 2rem;
-  border-right: 1px solid gray;
+  flex-grow: 1;
   font-size: 20px;
   font-weight: bolder;
   height: 100%;
+  padding: 0px 2vw;
 }
 
 .tab,
-.banner-container {
+.banner-container,
+#banner,
+.banner-sub-container {
   display: flex;
 }
 
 .tab {
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
 .banner-container {
+  justify-content: flex-end;
+  flex-grow: 1;
+  box-sizing: border-box;
+}
+
+.banner-sub-container {
   flex-direction: column;
-  align-items: flex-end;
-}
-
-.banner-element {
-  width: 50%;
-}
-
-.banner-container {
-  margin: 2vh 4vw;
+  justify-content: space-between;
+  width: fit-content;
 }
 
 a {
   text-decoration: none;
   color: #fff;
+}
+
+.banner-element {
+  padding: 0.75rem;
+  width: fit-content;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+
+.banner-element:hover {
+  background-color: rgba(231, 233, 234, 0.1);
+}
+
+@media only screen and (max-width: 756px) {
+  .tab .tab-title {
+    display: none;
+  }
 }

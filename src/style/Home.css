@@ -1,1 +1,18 @@
+#home {
+  flex-grow: 4;
+}
 
+#home {
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media only screen and (max-width: 1080px) {
+  #sidebar {
+    display: none;
+  }
+
+  #banner {
+    flex-grow: 0;
+  }
+}
