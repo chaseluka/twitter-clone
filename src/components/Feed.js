@@ -1,111 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../style/Feed.css";
 import Tweet from "./Tweet";
+import Message from "./Message";
+import { query, collection, getDocs } from "firebase/firestore";
+import { store } from "../firebase/firebase.config";
 
 const Feed = () => {
-  const [tweets, setTweets] = useState([
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-    {
-      displayName: "Joe Cool",
-      username: "joeiscool",
-      tweet:
-        "I think Im pretty cool dont you my good freind I think we ought to consider this together",
-      likes: 2,
-      time: "12d",
-    },
-  ]);
+  const [tweets, setTweets] = useState([]);
 
-  const autoGrow = (e) => {
-    e.target.style.height = "5px";
-    e.target.style.height = e.target.scrollHeight + "px";
-  };
+  useEffect(() => {
+    const retrieveCharacters = async () => {
+      try {
+        const tweetsQuery = query(collection(store, "tweets"));
+        const querySnapshot = await getDocs(tweetsQuery);
+        const tweetsList = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          tweetsList.push(data);
+        });
+        setTweets(tweetsList);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    retrieveCharacters();
+  });
 
   return (
     <div id="feed">
@@ -113,22 +32,7 @@ const Feed = () => {
         <div className="feed-title">Home</div>
       </div>
       <div className="feed-container">
-        <form id="tweet">
-          <div className="message-container">
-            <div className="message-top">
-              <textarea
-                type="text"
-                id="message"
-                name="tweet"
-                placeholder="What's Happening?"
-                onChange={autoGrow}
-              ></textarea>
-            </div>
-            <div className="message-bottom">
-              <button type="submit">Tweet</button>
-            </div>
-          </div>
-        </form>
+        <Message />
         <div className="feed-body">
           <Tweet tweets={tweets} />
         </div>
