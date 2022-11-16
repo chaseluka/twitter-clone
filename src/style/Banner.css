@@ -11,6 +11,8 @@ svg {
   font-weight: bolder;
   height: 100%;
   padding: 0px 2vw;
+  height: 100%;
+  overflow: hidden;
 }
 
 .tab,
