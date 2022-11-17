@@ -1,15 +1,33 @@
 import React, { useState, useEffect } from "react";
 import "../style/Feed.css";
 import Tweet from "./Tweet";
-import Message from "./Message";
-import { query, collection, getDocs } from "firebase/firestore";
+import Write from "./Write";
+import {
+  query,
+  collection,
+  getDocs,
+  updateDoc,
+  doc,
+  increment,
+} from "firebase/firestore";
 import { store } from "../firebase/firebase.config";
 
 const Feed = () => {
   const [tweets, setTweets] = useState([]);
+  const [toggleFeed, setToggleFeed] = useState(false);
+
+  const refreshFeed = () => setToggleFeed((toggleFeed) => !toggleFeed);
+
+  const tweetIsLiked = async (e) => {
+    const id = e.target.id;
+    console.log(id);
+    await updateDoc(doc(store, "tweets", id), {
+      likes: increment(1),
+    });
+  };
 
   useEffect(() => {
-    const retrieveCharacters = async () => {
+    const getTweets = async () => {
       try {
         const tweetsQuery = query(collection(store, "tweets"));
         const querySnapshot = await getDocs(tweetsQuery);
@@ -23,8 +41,8 @@ const Feed = () => {
         console.log(err);
       }
     };
-    retrieveCharacters();
-  });
+    getTweets();
+  }, [toggleFeed]);
 
   return (
     <div id="feed">
@@ -32,9 +50,9 @@ const Feed = () => {
         <div className="feed-title">Home</div>
       </div>
       <div className="feed-container">
-        <Message />
+        <Write refreshFeed={refreshFeed} />
         <div className="feed-body">
-          <Tweet tweets={tweets} />
+          <Tweet tweets={tweets} tweetIsLiked={tweetIsLiked} />
         </div>
       </div>
     </div>
