@@ -19,11 +19,11 @@ const Feed = () => {
   const refreshFeed = () => setToggleFeed((toggleFeed) => !toggleFeed);
 
   const tweetIsLiked = async (e) => {
-    const id = e.target.id;
-    console.log(id);
+    const id = e.currentTarget.parentElement.parentElement.parentElement.id;
     await updateDoc(doc(store, "tweets", id), {
       likes: increment(1),
     });
+    refreshFeed();
   };
 
   useEffect(() => {
@@ -36,12 +36,55 @@ const Feed = () => {
           const data = doc.data();
           tweetsList.push(data);
         });
-        setTweets(tweetsList);
+        return tweetsList;
       } catch (err) {
         console.log(err);
       }
     };
-    getTweets();
+
+    const mergeSort = (array) => {
+      if (array.length < 2) return array;
+      const half = Math.ceil(array.length / 2);
+      const leftHalf = array.splice(0, half);
+      const rightHalf = array;
+      const sortLeft = mergeSort(leftHalf);
+      const sortRight = mergeSort(rightHalf);
+      const sortedArray = [];
+      while (sortLeft !== [] || sortRight !== []) {
+        if (sortLeft[0] === undefined) {
+          sortedArray.push.apply(sortedArray, sortRight);
+          break;
+        }
+        if (sortRight[0] === undefined) {
+          sortedArray.push.apply(sortedArray, sortLeft);
+          break;
+        } else {
+          const smallNum =
+            sortLeft[0].time < sortRight[0].time
+              ? sortRight.splice(0, 1)
+              : sortLeft.splice(0, 1);
+          sortedArray.push.apply(sortedArray, smallNum);
+        }
+      }
+      return sortedArray;
+    };
+
+    const orderTweetsByTime = async () => {
+      const unorderedTweets = await getTweets();
+      const orderedTweets = mergeSort(unorderedTweets);
+      console.log(
+        mergeSort([
+          { time: 123 },
+          { time: 1543 },
+          { time: 2 },
+          { time: 200 },
+          { time: 154 },
+          { time: 34 },
+        ])
+      );
+      setTweets(orderedTweets);
+    };
+    orderTweetsByTime();
   }, [toggleFeed]);
 
   return (

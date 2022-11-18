@@ -35,7 +35,7 @@ const Tweet = ({ tweets, tweetIsLiked }) => {
                 <div className="tweet-message">{tweet.tweet}</div>
               </div>
               <div className="tweet-bottom">
-                <div className="likes" onClick={() => tweetIsLiked()}>
+                <div className="likes" onClick={(e) => tweetIsLiked(e)}>
                   <Heart />
                   <div className="like-amount">{tweet.likes}</div>
                 </div>

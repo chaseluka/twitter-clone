@@ -24,7 +24,7 @@ const Popup = ({
   }, [login]);
 
   return (
-    <div id="popup">
+    <div id="popup" role="form">
       {(() => {
         if (loginSelected) {
           return (
