@@ -16,6 +16,6 @@ Node.js - Webpack - Firebase - React.js - CSS - HTML
 Istallation
 -----------
   1. Fork or Clone Repository
-  2. `cd portfolio/`
+  2. `cd twitter-clone/`
   3. `npm start`
   4. Navigate to `localhost:3000` in browser
