@@ -7,7 +7,7 @@ This project works as a final project for the Javascript path of The Odin Projec
 
 Live View
 ---------
-https://portfolio-b55a2.web.app/
+twitterclone-641f5.web.app/
 
 Stack
 -----
